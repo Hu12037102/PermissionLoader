@@ -41,10 +41,17 @@
         android:id="@+id/btn_request_2"
         app:layout_constraintTop_toBottomOf="@id/btn_request_1"
         />
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="测试"
+        app:layout_constraintTop_toBottomOf="@id/btn_request_2"
+        android:id="@+id/btn_test"
+        />
     <fragment
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_request_2"
+        app:layout_constraintTop_toBottomOf="@id/btn_test"
         app:layout_constraintBottom_toBottomOf="parent"
         android:name="com.google.permissionloader.PermissionFragment"
         android:id="@+id/fragment"
