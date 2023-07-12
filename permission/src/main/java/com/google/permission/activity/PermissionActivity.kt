@@ -10,7 +10,7 @@ import com.google.permission.PermissionStatus
 
 open class PermissionActivity : AppCompatActivity() {
     private var mPermission: String = ""
-    private var mPermissionArray: Array<out String> ?=null
+    private var mPermissionArray: Array<out String>? = null
     private var mOnPermissionResult: OnPermissionResult? = null
     private val mLauncherPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
@@ -128,18 +128,28 @@ open class PermissionActivity : AppCompatActivity() {
 
 
     fun requestPermissionX(permission: String, onPermissionResult: OnPermissionResult) {
-        this.mPermission = permission
-        this.mOnPermissionResult = onPermissionResult
-        mLauncherPermission.launch(permission)
+        try {
+            this.mPermission = permission
+            this.mOnPermissionResult = onPermissionResult
+            mLauncherPermission.launch(permission)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
     fun requestPermissionXs(
         permissions: Array<out String>,
         onPermissionResult: OnPermissionResult
     ) {
-        mPermissionArray = permissions
-        this.mOnPermissionResult = onPermissionResult
-        mLauncherPermissions.launch(mPermissionArray)
+        try {
+            mPermissionArray = permissions
+            this.mOnPermissionResult = onPermissionResult
+            mLauncherPermissions.launch(mPermissionArray)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
     override fun onRequestPermissionsResult(
@@ -187,8 +197,12 @@ open class PermissionActivity : AppCompatActivity() {
 
 
     override fun onDestroy() {
-        mLauncherPermission.unregister()
         super.onDestroy()
-
+        try {
+            mLauncherPermission.unregister()
+            mLauncherPermissions.unregister()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
